@@ -28,11 +28,13 @@ class _LoginSignupState
                   decoration: const InputDecoration(
                     label: Text('Username'),
                   ),
+                  onChanged: controller.setEmail,
                 ),
                 TextFormField(
                   decoration: const InputDecoration(
                     label: Text('Password'),
                   ),
+                  onChanged: controller.setPassword,
                 ),
               ],
             ),

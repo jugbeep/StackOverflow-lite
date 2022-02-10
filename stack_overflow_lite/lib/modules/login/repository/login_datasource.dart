@@ -17,7 +17,7 @@ class FirebaseDatasourceImpl implements LoginDatasource {
             'https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyBXGhQ2MWK3ADCN0uOQkMuaLRAlFiaoSuM'),
         body: {'email': email, 'password': password});
 
-    print(result);
+    print(result.body);
     final user = result;
     return UserModel(
       name: 'John',
