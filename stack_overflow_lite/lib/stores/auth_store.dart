@@ -4,6 +4,8 @@ import 'package:asuka/asuka.dart' as asuka;
 import 'package:stack_overflow_lite/modules/login/entities/logged_user.dart';
 
 import '../modules/login/entities/auth_user.dart';
+import '../modules/login/usecases/get_logged_user.dart';
+import '../modules/login/usecases/logout.dart';
 
 part 'auth_store.g.dart';
 
@@ -16,7 +18,7 @@ abstract class _AuthStoreBase with Store {
   _AuthStoreBase(this.getLoggedUser, this.logout);
 
   @observable
-  LoggedUserInfo user;
+  late LoggedUserInfo user;
 
   @computed
   bool get isLogged => user.email != '';
@@ -26,7 +28,7 @@ abstract class _AuthStoreBase with Store {
 
   Future<bool> checkLogin() async {
     var result = await getLoggedUser();
-    return result.fold((l) => null, (user) {
+    return result.fold((l) => false, (user) {
       setUser(user);
       return true;
     });

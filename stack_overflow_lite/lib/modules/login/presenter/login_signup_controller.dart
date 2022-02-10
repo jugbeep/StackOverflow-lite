@@ -4,6 +4,8 @@ import 'package:mobx/mobx.dart';
 import 'package:stack_overflow_lite/modules/login/entities/login_credentail.dart';
 import 'package:stack_overflow_lite/modules/login/usecases/login_usecase.dart';
 import 'package:asuka/asuka.dart' as asuka;
+
+import '../../../stores/auth_store.dart';
 part 'login_signup_controller.g.dart';
 
 class LoginSignupController = _LoginSignupControllerBase

@@ -11,6 +11,8 @@ dependencies:
     sdk: flutter
   connectivity_plus: ^2.2.0
   flutter_mobx: ^2.0.4
+  firebase_core:
+  firebase_auth:
   asuka: ^2.0.0
   mobx: ^2.0.6+1
   flutter_modular: ^4.4.0+1

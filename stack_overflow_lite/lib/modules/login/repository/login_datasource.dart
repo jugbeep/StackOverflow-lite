@@ -1,27 +1,47 @@
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:stack_overflow_lite/modules/login/errors/errors.dart';
+
 import '../models/user.dart';
 import 'package:http/http.dart' as http;
 
 abstract class LoginDatasource {
   Future<UserModel> loginEmail(
       {required String email, required String password});
+
+  Future<UserModel> currentUser();
+  Future<void> logout();
 }
 
 class FirebaseDatasourceImpl implements LoginDatasource {
-  FirebaseDatasourceImpl();
+  final FirebaseAuth auth;
+
+  FirebaseDatasourceImpl(this.auth);
 
   @override
   Future<UserModel> loginEmail(
       {required String email, required String password}) async {
-    final result = await http.post(
-        Uri.parse(
-            'https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyBXGhQ2MWK3ADCN0uOQkMuaLRAlFiaoSuM'),
-        body: {'email': email, 'password': password});
+    final result =
+        await auth.signInWithEmailAndPassword(email: email, password: password);
 
-    print(result.body);
-    final user = result;
+    final user = result.user;
+
+    return UserModel(name: user!.displayName!, email: user.email!);
+  }
+
+  @override
+  Future<UserModel> currentUser() async {
+    var user = auth.currentUser;
+
+    if (user == null) throw ErrorGetLoggedUser(message: 'No current user');
+
     return UserModel(
-      name: 'John',
-      email: 'john@fake.com',
+      name: user.displayName!,
+      email: user.email!,
     );
+  }
+
+  @override
+  Future<void> logout() async {
+    return await auth.signOut();
   }
 }
