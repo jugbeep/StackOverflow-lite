@@ -1,8 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_modular/flutter_modular.dart';
+import 'package:stack_overflow_lite/modules/login/presenter/login_signup_controller.dart';
 
-class LoginSignup extends StatelessWidget {
+class LoginSignup extends StatefulWidget {
   const LoginSignup({Key? key}) : super(key: key);
 
+  @override
+  State<LoginSignup> createState() => _LoginSignupState();
+}
+
+class _LoginSignupState
+    extends ModularState<LoginSignup, LoginSignupController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -32,7 +40,7 @@ class LoginSignup extends StatelessWidget {
         ),
         Row(mainAxisAlignment: MainAxisAlignment.center, children: [
           MaterialButton(
-            onPressed: () {},
+            onPressed: controller.login,
             child: const Text('LOGIN'),
             color: Theme.of(context).primaryColor,
           ),
