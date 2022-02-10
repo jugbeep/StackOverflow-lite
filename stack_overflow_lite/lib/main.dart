@@ -3,7 +3,7 @@ import 'package:flutter_modular/flutter_modular.dart';
 import 'package:stack_overflow_lite/app_module.dart';
 import 'package:asuka/asuka.dart' as asuka;
 
-void main() async {
+void main() {
   WidgetsFlutterBinding.ensureInitialized();
   runApp(ModularApp(module: AppModule(), child: const MyApp()));
 }

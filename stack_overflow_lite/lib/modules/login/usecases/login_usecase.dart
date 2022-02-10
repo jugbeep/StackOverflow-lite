@@ -17,7 +17,7 @@ class LoginImpl implements LoginUsecase {
   @override
   Future<Either<Failure, LoggedUserInfo>> call(
       LoginCredential credential) async {
-    print('call');
+    print(credential);
     if (!credential.isValidEmail) {
       return Left(LoginError(message: "Invalid email "));
     }
