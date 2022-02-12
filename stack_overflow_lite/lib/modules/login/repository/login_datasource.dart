@@ -20,12 +20,12 @@ class FirebaseDatasourceImpl implements LoginDatasource {
   @override
   Future<UserModel> loginEmail(
       {required String email, required String password}) async {
-    final result =
+    final UserCredential result =
         await auth.signInWithEmailAndPassword(email: email, password: password);
 
     final user = result.user;
 
-    return UserModel(name: user!.displayName!, email: user.email!);
+    return UserModel(email: user!.email!, uid: user.uid);
   }
 
   @override
@@ -34,10 +34,7 @@ class FirebaseDatasourceImpl implements LoginDatasource {
 
     if (user == null) throw ErrorGetLoggedUser(message: 'No current user');
 
-    return UserModel(
-      name: user.displayName!,
-      email: user.email!,
-    );
+    return UserModel(email: user.email!, uid: user.uid);
   }
 
   @override

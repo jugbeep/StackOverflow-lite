@@ -5,12 +5,16 @@ import 'package:stack_overflow_lite/modules/login/presenter/login_page.dart';
 import 'package:stack_overflow_lite/modules/login/presenter/login_signup_controller.dart';
 import 'package:stack_overflow_lite/modules/login/repository/login_datasource.dart';
 import 'package:stack_overflow_lite/modules/login/repository/login_repository.dart';
+import 'package:stack_overflow_lite/modules/login/usecases/get_logged_user.dart';
 import 'package:stack_overflow_lite/modules/login/usecases/login_usecase.dart';
+import 'package:stack_overflow_lite/modules/login/usecases/logout.dart';
 import 'package:stack_overflow_lite/stores/auth_store.dart';
 
 class LoginModule extends Module {
   static List<Bind> export = [
+    Bind.singleton((i) => LogoutImpl(i())),
     Bind.singleton((i) => LoginRepositoryImpl(i())),
+    Bind.singleton((i) => GetLoggedUserImpl(i())),
     Bind.singleton((i) => FirebaseDatasourceImpl(i())),
   ];
 

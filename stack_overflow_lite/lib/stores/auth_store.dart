@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:mobx/mobx.dart';
 import 'package:asuka/asuka.dart' as asuka;
 import 'package:stack_overflow_lite/modules/login/entities/logged_user.dart';
+import 'package:stack_overflow_lite/modules/login/models/user.dart';
 
 import '../modules/login/entities/auth_user.dart';
 import '../modules/login/usecases/get_logged_user.dart';
@@ -15,21 +16,23 @@ abstract class _AuthStoreBase with Store {
   final GetLoggedUser getLoggedUser;
   final Logout logout;
 
-  _AuthStoreBase(this.getLoggedUser, this.logout);
+  _AuthStoreBase(this.getLoggedUser, this.logout) {
+    checkLogin();
+  }
 
   @observable
-  late LoggedUserInfo user;
+  LoggedUserInfo user = UserModel(email: '', uid: '');
 
   @computed
   bool get isLogged => user.email != '';
 
   @action
-  void setUser(value) => user = value;
+  void setUser(LoggedUserInfo value) => user = value;
 
   Future<bool> checkLogin() async {
     var result = await getLoggedUser();
-    return result.fold((l) => false, (user) {
-      setUser(user);
+    return result.fold((l) => false, (newUser) {
+      setUser(newUser);
       return true;
     });
   }
@@ -39,7 +42,7 @@ abstract class _AuthStoreBase with Store {
     result.fold((l) {
       asuka.showSnackBar(SnackBar(content: Text(l.message)));
     }, (r) {
-      setUser(null);
+      setUser(UserModel(email: '', uid: ''));
     });
   }
 }

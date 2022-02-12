@@ -24,10 +24,9 @@ class LoginRepositoryImpl implements LoginRepository {
     try {
       final user =
           await datasource.loginEmail(email: email, password: password);
-
       return Right(user);
     } catch (e) {
-      return Left(ErrorLoginEmail(message: "Error login with Email"));
+      return Left(ErrorLoginEmail(message: e.toString()));
     }
   }
 

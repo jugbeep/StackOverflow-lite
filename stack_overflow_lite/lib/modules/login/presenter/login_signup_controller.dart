@@ -39,13 +39,12 @@ abstract class _LoginSignupControllerBase with Store {
   void login() async {
     loading = true;
     var result = await loginWithEmail(credential);
-    loading = false;
     result.fold((failure) {
+      loading = false;
       asuka.showSnackBar(SnackBar(content: Text(failure.message)));
     }, (user) {
       authStore.setUser(user);
-      // Modular.to
-      //     .popUntil(ModalRoute.withName(Modular.navigatorDelegate.modulePath));
+      loading = false;
       Modular.to.pushNamed('/home');
     });
   }

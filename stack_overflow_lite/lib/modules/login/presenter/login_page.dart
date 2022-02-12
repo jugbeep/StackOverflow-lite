@@ -43,13 +43,10 @@ class _LoginSignupState
         Row(mainAxisAlignment: MainAxisAlignment.center, children: [
           MaterialButton(
             onPressed: controller.login,
-            child: const Text('LOGIN'),
+            child: controller.loading
+                ? const Center(child: CircularProgressIndicator())
+                : const Text('Login'),
             color: Theme.of(context).primaryColor,
-          ),
-          const SizedBox(width: 10),
-          MaterialButton(
-            onPressed: () {},
-            child: const Text('SIGNUP'),
           ),
         ]),
       ],
