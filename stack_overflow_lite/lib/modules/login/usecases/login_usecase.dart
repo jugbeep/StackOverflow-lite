@@ -19,6 +19,8 @@ class LoginImpl implements LoginUsecase {
       LoginCredential credential) async {
     if (!credential.isValidEmail) {
       return Left(LoginError(message: "Invalid email "));
+    } else if (!credential.isValidPassword) {
+      return Left(ErrorLoginEmail(message: "Invalid Password"));
     }
 
     return await repository.loginEmail(

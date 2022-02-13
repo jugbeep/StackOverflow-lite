@@ -14,29 +14,11 @@ class LoginCredential {
   bool get isValidPassword =>
       password != null && password!.isNotEmpty && password!.length > 3;
 
-  bool get isValidCode => code != null && code!.isNotEmpty;
-  bool get isValidVerificationId =>
-      verificationId != null && verificationId!.isNotEmpty;
-
   factory LoginCredential.withEmailAndPassword(
       {required String email, required String password}) {
     return LoginCredential._(
       email: email,
       password: password,
-    );
-  }
-
-  factory LoginCredential.withPhone({required String phoneNumber}) {
-    return LoginCredential._(
-      phone: phoneNumber,
-    );
-  }
-
-  factory LoginCredential.withVerificationCode(
-      {required String code, required String verificationId}) {
-    return LoginCredential._(
-      code: code,
-      verificationId: verificationId,
     );
   }
 }

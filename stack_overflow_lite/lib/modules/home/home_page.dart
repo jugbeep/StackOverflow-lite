@@ -34,7 +34,7 @@ class _HomePageState extends ModularState<HomePage, HomeController> {
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        Text("Logged!"),
+        const Text("Logged in!"),
         const SizedBox(
           height: 10,
         ),
@@ -43,7 +43,7 @@ class _HomePageState extends ModularState<HomePage, HomeController> {
         const SizedBox(height: 10),
         ElevatedButton(
           onPressed: () => authStore.signOut(),
-          child: Text("Logout"),
+          child: const Text("Logout"),
         ),
       ],
     );
@@ -52,7 +52,7 @@ class _HomePageState extends ModularState<HomePage, HomeController> {
   Widget _getLogoutScreen() {
     return ElevatedButton(
       onPressed: () => Modular.to.pushNamed("/login"),
-      child: Text("Login"),
+      child: const Text("Login"),
     );
   }
 }

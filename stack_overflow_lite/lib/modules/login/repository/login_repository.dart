@@ -47,7 +47,7 @@ class LoginRepositoryImpl implements LoginRepository {
     try {
       await datasource.logout();
 
-      return Right(unit);
+      return const Right(unit);
     } catch (e) {
       return Left(ErrorLogout(message: "Error in logout"));
     }
