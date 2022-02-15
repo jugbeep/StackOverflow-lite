@@ -6,4 +6,4 @@ pass: Genopet$1
 
 Run in chrome browser instance
 
-Run tests with '''flutter test''' script
+Run tests with 'flutter test "test_script_name"'
