@@ -31,6 +31,7 @@ class _LoginSignupState
                   onChanged: controller.setEmail,
                 ),
                 TextFormField(
+                  obscureText: true,
                   decoration: const InputDecoration(
                     label: Text('Password'),
                   ),
